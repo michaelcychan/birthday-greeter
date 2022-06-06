@@ -9,11 +9,11 @@ class User
     @name = name
     @day = day.to_i
     @month = month.to_i
-    @today = DateTime.new(Time.now.year, Time.now.month, Time.now.day)
   end
 
   def generate_message
-    compare_date
+    today = DateTime.new(Time.now.year, Time.now.month, Time.now.day)
+    compare_date(today)
     if @difference == 0
       @message = "Happy Birthday #{@name}!"
     else
@@ -23,14 +23,14 @@ class User
 
   private
 
-  def compare_date
+  def compare_date(one_date)
     birthday_this_year = DateTime.new(Time.now.year, @day, @month)
     birthday_next_year = DateTime.new(Time.now.year + 1, @day, @month)
 
-    if birthday_this_year - @today >= 0
-      @difference = birthday_this_year - @today
+    if birthday_this_year - one_date >= 0
+      @difference = birthday_this_year - one_date
     else
-      @difference = birthday_next_year - @today
+      @difference = birthday_next_year - one_date
     end
     @difference = @difference.to_i
   end
