@@ -9,12 +9,11 @@ class BirthdayGreeter < Sinatra::Base
     register Sinatra::Reloader
   end
 
-
   enable :sessions
 
   # our routes would go here
   get '/' do
-    erb(:index)
+    erb :index
   end
 
   post '/info' do
@@ -26,6 +25,10 @@ class BirthdayGreeter < Sinatra::Base
     $user.generate_message
     @user = $user
     erb(:message)
+  end
+
+  get 'stylesheets/style.css' do
+    erb (:style)
   end
 
   # # Start the server if this file is executed directly (do not change the line below)
