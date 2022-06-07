@@ -12,7 +12,13 @@ class User
   end
 
   def generate_message
-    today = DateTime.new(Time.now.year, Time.now.month, Time.now.day)
+    # setting  "today" a fixed date for testing purpose
+    if ENV['ENVIRONMENT'] == 'test'
+      today = DateTime.new(2022, 6, 6)
+    else
+      today = DateTime.new(Time.now.year, Time.now.month, Time.now.day)
+    end
+    
     compare_date(today)
     if @difference == 0
       @message = "Happy Birthday #{@name}!"
